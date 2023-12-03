@@ -1,56 +1,54 @@
-import React from 'react';
-import Icon from 'react-native-vector-icons/FontAwesome';
-import { View, Text, TouchableOpacity, StyleSheet, Button } from 'react-native';
+import React from "react";
+import Icon from "react-native-vector-icons/FontAwesome";
+import { View, Text, TouchableOpacity, StyleSheet, Button } from "react-native";
 
-const CustomButton = ({ title, onPress, iconName }) => (
-  <TouchableOpacity onPress={onPress} style={styles.button}>
-    <Icon name={iconName} size={20} color="white" />
-    <Text style={styles.buttonText}>{title}</Text>
-  </TouchableOpacity>
-);
-const MainMenuScreen = ({ navigation }) => {
-  return (
-    <View style={styles.container}>
+class MainMenuScreen extends React.Component {
+  render() {
+    const { navigation } = this.props;
 
-      <CustomButton
-        title="Patient Management"
-        onPress={() => navigation.navigate('PatientManagement')}
-        iconName="user-md"
-      />
+    return (
+      <View style={styles.container}>
+        <TouchableOpacity onPress={() => navigation.navigate("PatientManagement")} style={styles.button}>
+          <Icon name="user-md" size={20} color="white" />
+          <Text style={styles.buttonText}>Patient Management</Text>
+        </TouchableOpacity>
 
-      <CustomButton
-        title="Appointment Scheduling"
-        onPress={() => navigation.navigate('Appointments')}
-        iconName="calendar"
-      />
-      <CustomButton
-        title="Settings"
-        onPress={() => navigation.navigate('Settings')}
-        iconName="cog"
-      />
-    </View>
-  );
-};
+        <TouchableOpacity onPress={() => navigation.navigate("Appointments")} style={styles.button}>
+          <Icon name="calendar" size={20} color="white" />
+          <Text style={styles.buttonText}>Appointment Scheduling</Text>
+        </TouchableOpacity>
+
+        <TouchableOpacity onPress={() => navigation.navigate("Settings")} style={styles.button}>
+          <Icon name="cog" size={20} color="white" />
+          <Text style={styles.buttonText}>Settings</Text>
+        </TouchableOpacity>
+      </View>
+    );
+  }
+}
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#f5f5f5', // You can choose your color
+    justifyContent: "center",
+    alignItems: "center",
+    backgroundColor: "#f5f5f5",
   },
   button: {
-    backgroundColor: '#007bff', // Primary color
+    backgroundColor: "#007bff",
     padding: 15,
     borderRadius: 5,
     margin: 10,
-    width: 250, // Set the width as needed
-    alignItems: 'center',
+    width: 250,
+    alignItems: "center",
+    flexDirection: "row", // Align icon and text horizontally
+    justifyContent: "center" // Center icon and text within the button
   },
   buttonText: {
-    color: 'white',
+    color: "white",
     fontSize: 16,
-    fontWeight: 'bold',
+    fontWeight: "bold",
+    marginLeft: 10, // Add space between the icon and text
   },
 });
 
