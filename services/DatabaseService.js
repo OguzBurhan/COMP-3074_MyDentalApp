@@ -130,6 +130,39 @@ const DatabaseService = {
         }
     },
 
+
+    /**
+     * Updates a user's credentials in local storage.
+     * 
+     * @param {string} username - The username of the user to update.
+     * @param {Object} updatedCredentials - The updated credentials of the user.
+     */
+     async updateUserCredentials(username, updatedCredentials) {
+        try {
+            // Retrieve the existing users from AsyncStorage
+            const usersJSON = await AsyncStorage.getItem(USERS_TABLE);
+            const users = usersJSON ? JSON.parse(usersJSON) : {};
+
+            // Check if the user exists
+            if (!users[username]) {
+                throw new Error('User not found');
+            }
+
+            // Update the user's credentials
+            users[username] = { ...users[username], ...updatedCredentials };
+
+            // Save the updated users back to AsyncStorage
+            await AsyncStorage.setItem(USERS_TABLE, JSON.stringify(users));
+
+            console.log('User credentials updated in AsyncStorage.');
+        } catch (error) {
+            console.error('Error updating user credentials in AsyncStorage:', error);
+            throw error; // or handle it as needed
+        }
+    },
+
+
+
 }
 
 export default DatabaseService;
